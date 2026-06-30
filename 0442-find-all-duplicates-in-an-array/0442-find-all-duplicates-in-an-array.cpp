@@ -29,7 +29,7 @@ public:
             if(nums[abs(nums[i])-1] < 0){
                 answer.push_back(abs(nums[i]));
             }
-            nums[abs(nums[i])-1]=-nums[abs(nums[i])-1];
+            nums[abs(nums[i])-1] = -1 * nums[abs(nums[i])-1];
         }
         return answer;
     }
