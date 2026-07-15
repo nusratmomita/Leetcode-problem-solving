@@ -1,33 +1,72 @@
 class Solution {
 public:
     vector<int> intersection(vector<int>& nums1, vector<int>& nums2) {
+        // approach 1
+        // sort(nums1.begin(),nums1.end());
+        // sort(nums2.begin(),nums2.end());
+
+        // int i = 0;
+        // int j = 0;
+        
+        // set<int> s;
+
+        // vector<int> answer;
+
+        // while(i<nums1.size() && j<nums2.size()){
+        //     if(nums1[i] == nums2[j]){
+        //         s.insert(nums1[i]);
+        //         i++;
+        //         j++;
+        //     }
+
+        //     else if(nums1[i] < nums2[j]){
+        //         i++;
+        //     }
+
+        //     else{
+        //         j++;
+        //     }
+        // }
+
+        // answer.assign(s.begin(),s.end());
+        // return answer;
+
+
+        // approach 2 --> optimal
         sort(nums1.begin(),nums1.end());
         sort(nums2.begin(),nums2.end());
 
         int i = 0;
         int j = 0;
-        
-        set<int> s;
 
-        vector<int> answer;
+        int m = nums1.size();
+        int n = nums2.size();
 
-        while(i<nums1.size() && j<nums2.size()){
+        vector<int> result;
+
+        while(i<m && j<n){
             if(nums1[i] == nums2[j]){
-                s.insert(nums1[i]);
+                result.push_back(nums1[i]);
+
+                while(i<m-1 && nums1[i] == nums1[i+1]){
+                    i++;
+                }
+                while(j<n-1 && nums2[j] == nums2[j+1]){
+                    j++;
+                }
+                
                 i++;
                 j++;
             }
 
-            else if(nums1[i] < nums2[j]){
-                i++;
+            else if(nums1[i] > nums2[j]){
+                j++;
             }
-
             else{
-                j++;
+                i++;
             }
         }
 
-        answer.assign(s.begin(),s.end());
-        return answer;
+        return result;
     }
 };
